@@ -4,10 +4,12 @@ import org.apache.http.Header;
 
 import com.example.mobbank_client.R;
 import com.github.MobBankApp.client.entity.LogTransaction;
+import com.github.MobBankApp.client.util.Validator;
 import com.loopj.android.http.AsyncHttpClient;
 import com.loopj.android.http.TextHttpResponseHandler;
 
 import android.support.v7.app.ActionBarActivity;
+import android.app.AlertDialog;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -37,8 +39,15 @@ public class WithdrawActivity extends ActionBarActivity {
 	private OnClickListener bt1Listener = new OnClickListener() {
 		@Override
 		public void onClick(View v) {
-			acNumber = accountET.getText().toString();
-			String value = valueET.getText().toString();
+			withdraw();
+		}
+	};
+	
+	public void withdraw() {
+		acNumber = accountET.getText().toString();
+		String value = valueET.getText().toString();
+		
+		if(Validator.isValidFloatValue(value)) {
 			String resourceURL = "http://10.0.2.2:4000/account/" + 
 									acNumber + "/withdraw/" + value;
 			
@@ -62,10 +71,20 @@ public class WithdrawActivity extends ActionBarActivity {
 				public void onFailure(int arg0, Header[] arg1, String arg2, Throwable arg3) {
 					// TODO Auto-generated method stub
 				}
-			});
-
+			});				
 		}
-	};
+		else {
+			showErrorMessage("Invalid value.");
+			valueET.setText("");
+		}
+	}
+	
+	public void showErrorMessage(String message) {
+		AlertDialog.Builder dialogBuilder = new AlertDialog.Builder(this);
+		dialogBuilder.setMessage(message);
+		dialogBuilder.setPositiveButton("OK", null);
+		dialogBuilder.show();
+	}
 	
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
