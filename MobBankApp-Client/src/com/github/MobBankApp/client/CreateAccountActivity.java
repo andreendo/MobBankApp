@@ -11,6 +11,7 @@ import org.json.JSONObject;
 
 import com.example.mobbank_client.R;
 import com.github.MobBankApp.client.entity.LogTransaction;
+import com.github.MobBankApp.client.util.Validator;
 import com.loopj.android.http.AsyncHttpClient;
 import com.loopj.android.http.JsonHttpResponseHandler;
 
@@ -47,34 +48,47 @@ public class CreateAccountActivity extends ActionBarActivity {
 			String tName = nameET.getText().toString();
 			double tValue = Double.parseDouble( balanceET.getText().toString() );
 			
-			String resourceURL = "http://10.0.2.2:4000/account";
-			AsyncHttpClient httpClient = new AsyncHttpClient();
-			
-			//create Json object
-			JSONObject params = new JSONObject();
-			try {
-				params.put("clientName", tName);
-				params.put("balance", tValue);
-			} catch (JSONException e1) {
-				e1.printStackTrace();
+			if(Validator.isValidName(tName)) {
+				String resourceURL = "http://10.0.2.2:4000/account";
+				AsyncHttpClient httpClient = new AsyncHttpClient();
+				
+				//create Json object
+				JSONObject params = new JSONObject();
+				try {
+					params.put("clientName", tName);
+					params.put("balance", tValue);
+				} catch (JSONException e1) {
+					e1.printStackTrace();
+				}
+				
+				StringEntity entity = null;
+				try {
+					entity = new StringEntity(params.toString());
+					//indicate that the message sent is a json file
+					entity.setContentType(new BasicHeader(HTTP.CONTENT_TYPE, "application/json"));	 
+				} catch (UnsupportedEncodingException e) {
+					e.printStackTrace();
+				}
+				
+				httpClient.post(CreateAccountActivity.this, resourceURL, entity, "application/json", new JsonHttpResponseHandler() {
+					public void onSuccess(int statusCode, Header[] headers, JSONObject response) {
+						showSuccess(response);
+					};
+				});
 			}
-			
-			StringEntity entity = null;
-			try {
-				entity = new StringEntity(params.toString());
-				//indicate that the message sent is a json file
-				entity.setContentType(new BasicHeader(HTTP.CONTENT_TYPE, "application/json"));	 
-			} catch (UnsupportedEncodingException e) {
-				e.printStackTrace();
+			else {
+				showErrorMessage("Invalid name.");
+				nameET.setText("");
 			}
-			
-			httpClient.post(CreateAccountActivity.this, resourceURL, entity, "application/json", new JsonHttpResponseHandler() {
-				public void onSuccess(int statusCode, Header[] headers, JSONObject response) {
-					showSuccess(response);
-				};
-			});
 		}
 	};
+	
+	public void showErrorMessage(String message) {
+		AlertDialog.Builder dialogBuilder = new AlertDialog.Builder(CreateAccountActivity.this);
+		dialogBuilder.setMessage(message);
+		dialogBuilder.setPositiveButton("OK", null);
+		dialogBuilder.show();
+	}
 	
 	public void showSuccess(JSONObject response) {
 		AlertDialog.Builder dialogBuilder = new AlertDialog.Builder(CreateAccountActivity.this);

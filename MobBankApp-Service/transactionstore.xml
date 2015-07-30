@@ -61,4 +61,16 @@
         <description>viewing an account balance</description>
         <type>BALANCE</type>
     </transactionList>
+    <transactionList>
+        <accountNumber>1438289687061</accountNumber>
+        <date>30/07/2015 17:54:48</date>
+        <description>creating a new account</description>
+        <type>CREATE</type>
+    </transactionList>
+    <transactionList>
+        <accountNumber>1438289792996</accountNumber>
+        <date>30/07/2015 17:56:33</date>
+        <description>creating a new account</description>
+        <type>CREATE</type>
+    </transactionList>
 </transactionStore>
