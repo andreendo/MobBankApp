@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<transactionStore>
+    <name>store</name>
+    <transactionList>
+        <accountNumber>456</accountNumber>
+        <date>12/05/2015 17:01:01</date>
+        <description>the description here</description>
+        <type>WITHDRAW</type>
+    </transactionList>
+    <transactionList>
+        <accountNumber>456</accountNumber>
+        <date>12/05/2015 17:01:03</date>
+        <description>the description here</description>
+        <type>WITHDRAW</type>
+    </transactionList>
+    <transactionList>
+        <accountNumber>456</accountNumber>
+        <date>12/05/2015 17:01:04</date>
+        <description>the description here</description>
+        <type>WITHDRAW</type>
+    </transactionList>
+    <transactionList>
+        <accountNumber>1431538433288</accountNumber>
+        <date>13/05/2015 14:33:53</date>
+        <description>creating a new account</description>
+        <type>CREATE</type>
+    </transactionList>
+    <transactionList>
+        <accountNumber>1431538917405</accountNumber>
+        <date>13/05/2015 14:41:57</date>
+        <description>creating a new account</description>
+        <type>CREATE</type>
+    </transactionList>
+    <transactionList>
+        <accountNumber>1431538917405</accountNumber>
+        <date>13/05/2015 14:42:39</date>
+        <description>viewing an account balance</description>
+        <type>BALANCE</type>
+    </transactionList>
+    <transactionList>
+        <accountNumber>1431538917405</accountNumber>
+        <date>13/05/2015 14:43:26</date>
+        <description>depositing in an account</description>
+        <type>DEPOSIT</type>
+    </transactionList>
+    <transactionList>
+        <accountNumber>1431538917405</accountNumber>
+        <date>13/05/2015 14:44:25</date>
+        <description>drawing from an account</description>
+        <type>WITHDRAW</type>
+    </transactionList>
+    <transactionList>
+        <accountNumber>1431538917405</accountNumber>
+        <date>13/05/2015 14:44:58</date>
+        <description>closing an account</description>
+        <type>CLOSE</type>
+    </transactionList>
+    <transactionList>
+        <accountNumber>1431463613795</accountNumber>
+        <date>13/05/2015 14:45:49</date>
+        <description>viewing an account balance</description>
+        <type>BALANCE</type>
+    </transactionList>
+</transactionStore>
